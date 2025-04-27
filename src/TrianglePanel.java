@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Scanner;
 
 public class TrianglePanel extends JPanel {
 	
@@ -18,8 +19,24 @@ public class TrianglePanel extends JPanel {
 		Point p2 = new Point(50, 500);
 		Point p3 = new Point(550, 500);
 		
+		// Prompt the user to enter how many iterations they would like the program
+		// to run
+		System.out.println("How many iterations of triangles would you like to draw.");
+		Scanner scnr = new Scanner(System.in);
+		int userPrompt = 0;
+		
+		try {
+			while( ! (userPrompt > 0 && userPrompt < 11 ) ) {
+				System.out.println( "Enter a number between 1-10.");
+				userPrompt = scnr.nextInt();				
+			}		
+		}catch(Exception e) {
+			scnr.next();
+			System.out.println("Error: " + e.getMessage());
+		}
+		
 		// Invoke the recursion drawing function which will run 5 times
-		drawTriangle(g2d, p1, p2, p3, 5);
+		drawTriangle(g2d, p1, p2, p3, userPrompt);
 	}
 	
 	private void drawTriangle(Graphics2D g2d, Point p1, Point p2, Point p3, int iterations) {
