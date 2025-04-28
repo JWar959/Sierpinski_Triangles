@@ -2,37 +2,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Scanner;
 
+/**
+ * TrianglePanel is a custom JPanel that draws a Sierpinski Triangle based
+ * on user input specifying the number of iterations to run.
+ */
 public class TrianglePanel extends JPanel {
 	
 	private int iterations;
 	
-	// set up a constructor to capture the user input
-	public TrianglePanel() {
+	/**
+	 * Constructor that sets the member field instances to the value captured 
+	 * from the user.
+	 * @param iterations Number of recursive levels to draw.
+	 */
+	public TrianglePanel(int iterations) {
 		
-		// Prompt the user to enter how many iterations they would like the program
-		// to run
-		System.out.println("How many iterations of triangles would you like to draw.");
-		Scanner scnr = new Scanner(System.in);
-		int userPrompt = 0;
-		
-		try {
-			while( ! (userPrompt > 0 && userPrompt < 11 ) ) {
-				System.out.println( "Enter a number between 1-10.");
-				userPrompt = scnr.nextInt();				
-			}		
-			
-			// Set the member field with the value input by the user
-			this.iterations = userPrompt;
-			scnr.close();
-			
-		}catch(Exception e) {
-			scnr.next();
-			System.out.println("Error: " + e.getMessage());
-			// Set the default value to be 5 if there is an error
-			iterations = 5;
-		}		
+			this.iterations = iterations;
 	}
 	
+	/**
+	 * Overrides the paintComponent method to draw the Sierpinski Triangle.
+	 * @param g Graphics context used for drawing.
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -52,6 +43,14 @@ public class TrianglePanel extends JPanel {
 		drawTriangle(g2d, p1, p2, p3, iterations);
 	}
 	
+	/**
+	 * Recursively draws a Sierpinski Triangle
+	 * @param g2d {@link Graphics2D} context
+	 * @param p1 First Vertex
+	 * @param p2 Second Vertex
+	 * @param p3 Third Vertex
+	 * @param iterations Number of remaining iterations of recursive drawing.
+	 */
 	private void drawTriangle(Graphics2D g2d, Point p1, Point p2, Point p3, int iterations) {
 		// set up the base case to stop the recursion
 		if(iterations == 0) {
@@ -74,6 +73,12 @@ public class TrianglePanel extends JPanel {
 		drawTriangle(g2d, mid3, mid2, p3, iterations - 1);		
 	}
 	
+	/**
+	 * Calculates the midpoint between two points.
+	 * @param p1 First Vertex
+	 * @param p2 Second Vertex
+	 * @return Midpoint between p1 and p2
+	 */
 	private Point findMiddle(Point p1, Point p2) {
 		int middleX = (p1.x + p2.x) / 2;
 		int middleY = (p1.y + p2.y) / 2;
