@@ -9,6 +9,7 @@ import java.util.Random;
 public class TrianglePanel extends JPanel {
 	
 	private int iterations;
+	private Random randomNum = new Random();
 	
 	/**
 	 * Constructor that sets the member field instances to the value captured 
@@ -46,9 +47,9 @@ public class TrianglePanel extends JPanel {
 	/**
 	 * Recursively draws a Sierpinski Triangle
 	 * @param g2d {@link Graphics2D} context
-	 * @param p1 First Vertex
-	 * @param p2 Second Vertex
-	 * @param p3 Third Vertex
+	 * @param p1 first vertex
+	 * @param p2 second vertex
+	 * @param p3 third vertex
 	 * @param iterations Number of remaining iterations of recursive drawing.
 	 */
 	private void drawTriangle(Graphics2D g2d, Point p1, Point p2, Point p3, int iterations) {
@@ -82,11 +83,11 @@ public class TrianglePanel extends JPanel {
 	
 	/**
 	 * Calculates the midpoint between two points.
-	 * @param p1 First Vertex
-	 * @param p2 Second Vertex
+	 * @param p1 first vertex
+	 * @param p2 second vertex
 	 * @return Midpoint between p1 and p2
 	 */
-	private Point findMiddle(Point p1, Point p2) {
+	protected Point findMiddle(Point p1, Point p2) {
 		int middleX = (p1.x + p2.x) / 2;
 		int middleY = (p1.y + p2.y) / 2;
 		
@@ -102,10 +103,7 @@ public class TrianglePanel extends JPanel {
 	 * @param Graphics2D object that is set to draw the Sierpinski Triangles
 	 * @return Graphics2D object set to a random color
 	 */
-	private Graphics2D setRandomColor(Graphics2D g2d) {
-		// Randomly generate a color to paint with, ensuring
-		// the likelihood of every iteration being different.
-		Random randomNum = new Random();
+	protected Graphics2D setRandomColor(Graphics2D g2d) {
 		
 		// generate a random number between 0-255 for RGB values
 		int rNum = randomNum.nextInt(256);
