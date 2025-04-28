@@ -26,6 +26,7 @@ public class Main {
 		int userPrompt = 0;
 		
 		try {
+			// Ensure the user input is in the range [1,10]
 			while( ! (userPrompt > 0 && userPrompt < 11 ) ) {
 				System.out.println( "Enter a number between 1-10.");
 				userPrompt = scnr.nextInt();				

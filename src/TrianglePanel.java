@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.Scanner;
+import java.util.Random;
 
 /**
  * TrianglePanel is a custom JPanel that draws a Sierpinski Triangle based
@@ -31,8 +31,8 @@ public class TrianglePanel extends JPanel {
 		// Cast g to Graphics2D for better control
 		Graphics2D g2d = (Graphics2D)g;
 		
-		// Set color
-		g2d.setColor(Color.BLACK);
+		// Set to random color
+		g2d = setRandomColor(g2d);
 		
 		// Set the starting point for the initial triangle
 		Point p1 = new Point(300,50);
@@ -56,6 +56,10 @@ public class TrianglePanel extends JPanel {
 		if(iterations == 0) {
 			int[] xPoints = {p1.x, p2.x, p3.x};
 			int[] yPoints = {p1.y, p2.y, p3.y};
+			
+			//Set Random color
+			g2d = setRandomColor(g2d);
+			
 			g2d.fillPolygon(xPoints, yPoints, 3);
 			
 			// return to caller and halt the recursion
@@ -66,6 +70,9 @@ public class TrianglePanel extends JPanel {
 		Point mid1 = findMiddle(p1, p2);
 		Point mid2 = findMiddle(p2, p3);
 		Point mid3 = findMiddle(p3,p1);
+		
+		// Set Random color
+		g2d = setRandomColor(g2d);
 		
 		// Recursively draw the three smaller triangles
 		drawTriangle(g2d, p1, mid1, mid3, iterations - 1);
@@ -86,5 +93,31 @@ public class TrianglePanel extends JPanel {
 		// return the new middle point back to the caller
 		return new Point(middleX, middleY);
 	}
-
+	
+	/**
+	 * This function will set the drawing object to a randomized color based off
+	 * of 3 randomly generated values that are fed into the R, G, B values of a new
+	 * Color object.
+	 * 
+	 * @param Graphics2D object that is set to draw the Sierpinski Triangles
+	 * @return Graphics2D object set to a random color
+	 */
+	private Graphics2D setRandomColor(Graphics2D g2d) {
+		// Randomly generate a color to paint with, ensuring
+		// the likelihood of every iteration being different.
+		Random randomNum = new Random();
+		
+		// generate a random number between 0-255 for RGB values
+		int rNum = randomNum.nextInt(256);
+		int gNum = randomNum.nextInt(256);		
+		int bNum = randomNum.nextInt(256);
+		
+		// Now, create the color
+		Color newColor = new Color(rNum, gNum, bNum);
+		
+		// Set color
+		g2d.setColor(newColor);		
+		
+		return g2d;
+	}
 }
