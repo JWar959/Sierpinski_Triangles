@@ -1,4 +1,14 @@
+/**
+ * @author John Warren
+ * @version S2025
+ * @title CMPS-367 Lab 9
+ */
 import javax.swing.*;
+
+/**
+ * References Used: CMPS 367 Course Examples, 
+ * GeeksForGeeks, and official Java Graphics Documentation.
+ */
 
 public class Main {
 
